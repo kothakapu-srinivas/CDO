@@ -6,9 +6,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: OS Version details
-      run: cat /etc/os-release
+      run: cat /etc/os-release > os-details.txt
     - name: Listing files
       run: ls -ltr
-    - name: Is README.md file exists
-      run: ls -lr | grep -i readme.md
+    - name: Is os-details.txt file exists
+      run: |
+        ls -lr | grep -i os-details
+        cat os-details.txt
     
