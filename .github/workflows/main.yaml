@@ -1,37 +1,23 @@
-name: CDO Workflow
-on: push
+name: Deploy to GCP VM
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  CDO:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: OS Version details
-      run: cat /etc/os-release > os-details.txt
-    - name: Secret name
-      run: echo ${{ secrets.USER_NAME }}
-    - uses: actions/upload-artifact@v4
-      with:
-        name: os-details-artifact
-        path: os-details.txt
-    - name: Listing files
-      run: ls -ltr
-    - name: Is os-details.txt file exists
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up SSH key
       run: |
-        ls -lr | grep -i os-details
-        cat os-details.txt
-    
-  read_file_from_CDO_job:
-    needs: CDO
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: os-details-artifact
-    - name: listing files
-      run: ls -ltr
-    - name: Is file exists
-      run: ls -ltr | grep os-details.txt
-    - name: Reading file content
-      run: cat os-details.txt
-        
-  
+        mkdir -p ~/.ssh
+        echo "${{ secrets.GCP_VM_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.GCP_VM_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to GCP VM
+      run: |
+        ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} 'bash ~/ifconfig.sh'
