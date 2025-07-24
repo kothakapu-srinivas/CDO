@@ -24,8 +24,12 @@ jobs:
     steps:
     - uses: actions/download-artifact@v4
       with:
-        name: os-details.txt
-    - name: Reading artifact
-      run: cat os-details-artifact
+        name: os-details-artifact
+    - name: listing files
+      run: ls -ltr
+    - name: Is file exists
+      run: ls -ltr | grep os-details.txt
+    - name: Reading file content
+      run: cat os-details.txt
         
   
