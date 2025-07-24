@@ -1,0 +1,9 @@
+name: CDO Workflow
+on: push
+jobs:
+  CDO:
+    runs-on: ubuntu-latest
+    steps:
+    - name: OS Version details
+      run: cat /etc/os-release
+    
