@@ -4,6 +4,7 @@ jobs:
   CDO:
     runs-on: ubuntu-latest
     steps:
+    - uses: action/checkout@v4
     - name: OS Version details
       run: cat /etc/os-release
     - name: Listing files
