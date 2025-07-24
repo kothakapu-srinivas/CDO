@@ -10,7 +10,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: os-details-artifact
-        path: .github/workflows/os-details-artifact
+        path: .github/workflows/os-details.txt
     - name: Listing files
       run: ls -ltr
     - name: Is os-details.txt file exists
@@ -19,6 +19,7 @@ jobs:
         cat os-details.txt
     
   read_file_from_CDO_job:
+    needs: CDO
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v4
