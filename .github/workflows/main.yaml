@@ -7,6 +7,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: OS Version details
       run: cat /etc/os-release > os-details.txt
+    - name: Secret name
+      run: echo ${{ secrets.USER_NAME }}
     - uses: actions/upload-artifact@v4
       with:
         name: os-details-artifact
