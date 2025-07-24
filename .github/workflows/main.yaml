@@ -7,6 +7,10 @@ jobs:
     - uses: actions/checkout@v4
     - name: OS Version details
       run: cat /etc/os-release > os-details.txt
+    - uses: actions/upload-artifact@v4
+      with:
+        name: os-details-artifact
+        path: .github/workflows/os-details-artifact
     - name: Listing files
       run: ls -ltr
     - name: Is os-details.txt file exists
@@ -14,3 +18,13 @@ jobs:
         ls -lr | grep -i os-details
         cat os-details.txt
     
+  read_file_from_CDO_job:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: os-details-artifact
+    - name: Reading artifact
+      run: cat os-details-artifact
+        
+  
