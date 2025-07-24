@@ -1,9 +1,7 @@
 name: Deploy to GCP VM
 on:
   workflow_dispatch:
-    branches:
-      - main
-
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -11,13 +9,5 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Set up SSH key
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.GCP_VM_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.GCP_VM_HOST }} >> ~/.ssh/known_hosts
-
-    - name: Deploy to GCP VM
-      run: |
-        ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} 'bash ~/ifconfig.sh'
+    - name: Listing files
+      run: ls -altr
