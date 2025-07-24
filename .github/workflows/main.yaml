@@ -10,7 +10,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: os-details-artifact
-        path: .github/workflows/os-details.txt
+        path: os-details.txt
     - name: Listing files
       run: ls -ltr
     - name: Is os-details.txt file exists
