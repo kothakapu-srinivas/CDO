@@ -1,6 +1,6 @@
 name: Deploy to GCP VM
 on:
-  workflow_dispatch:
+  push:
   
 jobs:
   deploy:
