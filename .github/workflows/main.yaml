@@ -6,6 +6,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      
     - name: Checkout Code
       uses: actions/checkout@v4
 
@@ -17,3 +18,8 @@ jobs:
 
     - name: ENV names
       run: echo "We are deploying in ${{ vars.ENV_NAME }}"
+
+    - name: env name
+      env:
+        ENV_NAME: staging
+      run: echo "Running in ${{ env.ENV_NAME }}"  
