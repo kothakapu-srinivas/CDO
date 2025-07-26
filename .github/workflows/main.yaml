@@ -11,3 +11,6 @@ jobs:
 
     - name: Listing files
       run: ls -altr
+
+    - name: Lising env variables
+      run: env
