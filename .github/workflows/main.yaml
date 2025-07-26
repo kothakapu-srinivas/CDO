@@ -14,3 +14,6 @@ jobs:
 
     - name: Lising env variables
       run: env
+
+    - name: ENV name
+      run: echo "We are deploying in ${{ vars.ENV_NAME }}"
